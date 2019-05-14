@@ -20,5 +20,44 @@ namespace CB_Choice
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            for(int i = 0; i < this.SList.Length; i++)
+            {
+                this.cbList.Items.Add(SList[i]);
+            }
+            this.orgStr = this.lblResult.Text;
+            if(SList.Count() > 0)
+            {
+                this.cbList.SelectedIndex = 0;
+            }
+            
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if(this.txtList.Text != "")
+            {
+                cbList.Items.Add(this.txtList.Text);
+                MessageBox.Show("아이템을 추가하였습니다.", "알림",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("아이템을 입력해주세요.", "알림",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.txtList.Focus();
+            }
+            this.txtList.Text = "";
+        }
+
+        private void cbList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cbList.Text != "")
+            {
+                this.lblResult.Text = orgStr + this.cbList.Text;
+            }
+        }
     }
 }
